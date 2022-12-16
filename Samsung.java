@@ -1,0 +1,2 @@
+class Samsung extends Fridge{
+}

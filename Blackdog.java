@@ -1,0 +1,4 @@
+class BlackDog extends Alchohol{
+
+
+}
