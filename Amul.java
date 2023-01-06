@@ -1,4 +1,0 @@
-class Amul extends Icecream{
-
-
-}

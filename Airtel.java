@@ -1,5 +1,0 @@
-class Airtel extends Tele{
-
-
-
-}

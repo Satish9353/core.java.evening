@@ -1,3 +1,0 @@
-class Acc extends Cement{
-
-}
