@@ -1,0 +1,8 @@
+com\xworkz\lapapp\repo\LaptopRepositoryImpl.class
+com\xworkz\lapapp\config\SpringConfig.class
+com\xworkz\lapapp\controller\LaptopController.class
+com\xworkz\lapapp\config\LaptopWebInit.class
+com\xworkz\lapapp\dto\LaptopDTO.class
+com\xworkz\lapapp\service\LaptopServiceImpl.class
+com\xworkz\lapapp\service\LaptopService.class
+com\xworkz\lapapp\repo\LaptopRepo.class
