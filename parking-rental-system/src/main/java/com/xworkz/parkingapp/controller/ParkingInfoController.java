@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package com.xworkz.parkingapp.controller;
 
 import java.util.List;
@@ -58,3 +59,65 @@ public class ParkingInfoController {
 	
 
 }
+=======
+package com.xworkz.parkingapp.controller;
+
+import java.util.List;
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.xworkz.parkingapp.dto.ParkingInfoDTO;
+import com.xworkz.parkingapp.service.ParkingInfoService;
+@Controller
+public class ParkingInfoController {
+
+	@Autowired
+	ParkingInfoService service;
+	//public Set<ParkingInfoDTO> dtos = new TreeSet<>();
+
+	public ParkingInfoController() {
+		
+		System.out.println("created" + this.getClass().getSimpleName());
+		
+	}
+	
+	@PostMapping("savePI")
+	public String OnSave(@Valid ParkingInfoDTO dto,Model model,BindingResult bindingResult) {
+		System.out.println("inside onSave method");
+		model.addAttribute("dtos",dto);
+		
+		if(bindingResult.hasErrors()) {
+			System.out.println("data is invalide");
+			model.addAttribute("erros",bindingResult.getAllErrors());
+			model.addAttribute("dto",dto);
+
+			return "/information.jsp";
+		}else {
+			System.out.println("data is valid");
+			service.validateAndSave(dto);
+			//this.dtos.add(dto);
+			model.addAttribute("msg","ParkingInfo saved successfully");
+		}
+		return "/response.jsp";
+			
+	}
+	
+	@GetMapping("/search")
+	public String ShowData(Model model,String location) {
+		System.out.println("running search method");
+		List<ParkingInfoDTO> list = service.findByLocation(location);
+		//model.addAttribute("dtos",this.dtos);
+		model.addAttribute("list",list);
+
+		return "/View.jsp";
+	}
+	
+
+}
+>>>>>>> 90f3ecdb2433f231ce736432d86cf560e92bf14c
