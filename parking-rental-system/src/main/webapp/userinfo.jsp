@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -167,13 +166,12 @@ footer {
 		function findPrice() {
 			var location = document.getElementById("location").value;
 			var vtype = document.getElementById("vtype").value;
-			var classification = documenet.getElementById("vclassification").value;
-			var term = documenet.getElementById("term").value;
+			var classification = document.getElementById("vclassification").value;
+			var term = document.getElementById("term").value;
 
 			const httpRequest = new XMLHttpRequest();
 			httpRequest.open("GET",
-					"http://localhost:8080/parking-rental-system/userAjax/"location + "/" + vtype + "/" + classification
-							+ "/" + term);
+					"http://localhost:8080/parking-rental-system/userAjax/"+location + "/" + vtype + "/" + classification + "/" + term);
 			httpRequest.send();
 
 			httpRequest.onload = function() {
@@ -182,7 +180,7 @@ footer {
 			}
 		}
 	</script>
-	<form action="userSave" method="post">
+	<form action="userSave" method="post" >
 
 		<div class="form-group">
 			<label for="exampleInputEmail1"></label> <input type="text"
@@ -210,7 +208,7 @@ footer {
 				name="userMobileNo" class="form-control" id="exampleInputEmail"
 				placeholder="Enter mobile number" required>
 		</div>
-		Location:<select name="location" name="name"><br>
+		Location:<select name="location" id="location" ><br>
 			<option value="0">Select</option>
 			<br>
 
@@ -223,7 +221,7 @@ footer {
 		</select>
 
 		<div class="form-group">
-			Vehicle Type: <select name="vtype" class="form-control" required>
+			Vehicle Type: <select name="vtype" class="form-control" id="vtype" required>
 				<option value="">---Select---</option>
 				<option>2 Wheeler</option>
 				<option>4 Wheeler</option>
@@ -232,7 +230,7 @@ footer {
 		</div>
 
 		<div class="form-group">
-			Vehicle Classification: <select name="vclassification"
+			Vehicle Classification: <select name="vclassification" id="vclassification"
 				class="form-control" required>
 				<option value="">---Select---</option>
 				<option>Bike</option>
@@ -249,7 +247,7 @@ footer {
 				<option>Skoda</option>
 			</select>
 		</div>
-		Term:<select name="term" name="name"><br>
+		Term:<select name="term" id="term" onchange="findPrice()" ><br>
 			<option value="0">Select</option>
 			<br>
 

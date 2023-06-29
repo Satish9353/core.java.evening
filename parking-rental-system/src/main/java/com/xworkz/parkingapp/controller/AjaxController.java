@@ -30,13 +30,20 @@ public class AjaxController {
 	public String userAjax(@PathVariable String location, @PathVariable String vtype,
 			@PathVariable String vclassification, @PathVariable String term) {
 		ParkingInfoEntity entity = this.service.findByAll(location, vtype, vclassification, term);
+		System.out.println("entity : "+entity);
+		System.out.println(entity);
 		if (entity != null) {
-			System.out.println(" ");
+			System.out.println("fields are not exists ");
 		} else {
 			System.out.println("all fields are already exists");
 		}
 		return "data";
 
+	}
+
+	@GetMapping(value = "/name")
+	public String ajax() {
+		return "nsvdghjasdfs";
 	}
 
 }

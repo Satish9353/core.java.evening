@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,17 +45,27 @@ public class ParkingInfoRepoImpl implements ParkingInfoRepo {
 
 	@Override
 	public ParkingInfoEntity findByAll(String location, String vtype, String vclassification, String term) {
-		System.out.println("running findByAll in repo");
-		EntityManager manager = factory.createEntityManager();
-		Query query = manager.createNamedQuery("findByAll");
-		query.setParameter("loc",location);
-		query.setParameter("vt",vtype);
-		query.setParameter("vc", vclassification);
-		query.setParameter("t", term);
-		List<ParkingInfoEntity> list = query.getResultList();
-		System.out.println("list from repo"+list);
-		manager.close();
-		return (ParkingInfoEntity) list;
+		EntityManager manager = null;
+		try {
+			System.out.println("running findByAll in repo");
+			manager = factory.createEntityManager();
+			Query query = manager.createNamedQuery("findByAll");
+			query.setParameter("loc", location);
+			query.setParameter("vt", vtype);
+			query.setParameter("vc", vclassification);
+			query.setParameter("t", term);
+			Object singleResult = query.getSingleResult();
+			if (singleResult != null) {
+				ParkingInfoEntity entity = (ParkingInfoEntity) singleResult;
+				return entity;
+			}
+		} catch (PersistenceException e) {
+			e.printStackTrace();
+		} finally {
+			manager.close();
+		}
+		return null;
+
 	}
 
 }

@@ -45,6 +45,7 @@ public class ParkingInfoServiceImpl implements ParkingInfoService {
 	public ParkingInfoEntity findByAll(String location, String vtype, String vclassification, String term) {
 		System.out.println("running findByAll method");
 		ParkingInfoEntity entity = repo.findByAll(location, vtype, vclassification, term);
+		System.out.println("entity : "+entity);
 		return entity;
 	}
 }

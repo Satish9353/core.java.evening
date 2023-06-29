@@ -15,7 +15,8 @@ import lombok.Data;
 @Table(name = "parking_info")
 @NamedQueries({
 		@NamedQuery(name = "findByLoaction", query = "select entity from ParkingInfoEntity as entity where entity.location=:ab"),
-		@NamedQuery(name = "findByAll", query = "select entity from ParkingInfoEntity as entity where entity.location=:loc and entity.vtype=:vt and entity.vclassification=:vc and entity.term=:t" ) })
+		@NamedQuery(name = "findByAll", query = "select entity from ParkingInfoEntity"
+				+ " entity where entity.location=:loc and entity.vtype=:vt and entity.vclassification=:vc and entity.term=:t" ) })
 public class ParkingInfoEntity {
 
 	@Id
