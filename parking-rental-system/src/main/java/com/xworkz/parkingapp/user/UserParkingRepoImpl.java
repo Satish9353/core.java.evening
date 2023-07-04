@@ -15,7 +15,7 @@ public class UserParkingRepoImpl implements UserParkingRepo {
 		System.out.println("inside UserParkingRepoImpl");
 	}
 	@Override
-	public boolean saveInfo(UserParkingEntity entity) {
+	public boolean saveparkingInfo(UserParkingEntity entity) {
 		System.out.println("running saveInfo");
 		
 		EntityManager manager = factory.createEntityManager();

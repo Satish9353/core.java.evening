@@ -2,8 +2,6 @@ package com.xworkz.parkingapp.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-import lombok.extern.slf4j.Slf4j;
-
 public class ParkingWebInit extends AbstractAnnotationConfigDispatcherServletInitializer{
 
 	@Override

@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -167,18 +166,27 @@ footer {
 		function findPrice() {
 			var location = document.getElementById("location").value;
 			var vtype = document.getElementById("vtype").value;
-			var classification = documenet.getElementById("vclassification").value;
-			var term = documenet.getElementById("term").value;
+			var classification = document.getElementById("vclassification").value;
+			var term = document.getElementById("term").value;
 
 			const httpRequest = new XMLHttpRequest();
-			httpRequest.open("GET",
-					"http://localhost:8080/parking-rental-system/userAjax/"location + "/" + vtype + "/" + classification
-							+ "/" + term);
+			httpRequest.open("GET", "http://localhost:8080/parking-rental-system/userAjax/"+location + "/" + vtype + "/" + classification + "/" + term);
+			
 			httpRequest.send();
 
 			httpRequest.onload = function() {
 				console.log(this.responseText);
-				document.getElementById("error").innerHTML = this.responseText;
+				const obj=JSON.parse(this.responseText);
+				console.log(obj)
+				console.log(obj.price)
+				console.log(obj.discount)
+				console.log(obj.total)
+			    var pr=document.getElementById("price").value=obj.price;	
+				var dis=document.getElementById("discount").value=obj.discount;
+				var t = dis/100; /* we r getting value in float */
+				var d =pr*t; /* float value and actual value multiply */
+				var fi=pr-d; /* original price sub with discount we get total amount */
+				document.getElementById("total").value=fi;
 			}
 		}
 	</script>
@@ -190,7 +198,7 @@ footer {
 				required>
 		</div>
 
-		<div class="form-group">
+		<!-- <div class="form-group">
 			<label for="exampleInputEmail1"></label> <input type="number"
 				name="parkingId" class="form-control" placeholder="Enter parkingId"
 				required>
@@ -199,18 +207,18 @@ footer {
 			<label for="exampleInputPassword1"></label> <input type="number"
 				name="userId" class="form-control" id="exampleInputEmail"
 				placeholder="Enter userId" required>
-		</div>
+		</div> -->
 
 		<div class="form-group">
 			<label for="exampleInputEmail1"></label> <input type="email"
-				name="email" class="form-control" placeholder="Enter email" required>
+				name="userEmail" class="form-control" placeholder="Enter email" required>
 		</div>
 		<div class="form-group">
 			<label for="exampleInputPassword1"></label> <input type="number"
-				name="userMobileNo" class="form-control" id="exampleInputEmail"
+				name="userMobileNo" class="form-control" 
 				placeholder="Enter mobile number" required>
 		</div>
-		Location:<select name="location" name="name"><br>
+		Location:<select name="location" id="location"><br>
 			<option value="0">Select</option>
 			<br>
 
@@ -223,7 +231,8 @@ footer {
 		</select>
 
 		<div class="form-group">
-			Vehicle Type: <select name="vtype" class="form-control" required>
+			Vehicle Type: <select name="vtype" class="form-control" id="vtype"
+				required>
 				<option value="">---Select---</option>
 				<option>2 Wheeler</option>
 				<option>4 Wheeler</option>
@@ -233,7 +242,7 @@ footer {
 
 		<div class="form-group">
 			Vehicle Classification: <select name="vclassification"
-				class="form-control" required>
+				id="vclassification" class="form-control" required>
 				<option value="">---Select---</option>
 				<option>Bike</option>
 				<option>Kia</option>
@@ -249,7 +258,7 @@ footer {
 				<option>Skoda</option>
 			</select>
 		</div>
-		Term:<select name="term" name="name"><br>
+		Term:<select name="term" id="term" onchange="findPrice()"><br>
 			<option value="0">Select</option>
 			<br>
 
@@ -263,10 +272,10 @@ footer {
 			<option>365 DAYS</option>
 
 
-		</select> Price:<input type="number" name="price"> Discount:<input
-			type="number" name="discount"> Total Amount:<input
-			type="number" name="totalAmount"> <input type="submit"
-			value="Save">
+		</select> Price:<input type="text" name="price" id="price" readonly="readonly">
+		 Discount:<input type="text" name="discount" id="discount" readonly="readonly">
+		  Total Amount:<input type="number" name="totalAmount" id="total" readonly="readonly"> 
+			<input type="submit" value="Save">
 
 	</form>
 

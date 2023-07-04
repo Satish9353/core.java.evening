@@ -5,6 +5,10 @@ import lombok.Data;
 @Data
 public class UserParkingDTO {
 
+	private int parkingId;
+	
+	private int userId;
+	
 	private String location;
 
 	private String vtype;
